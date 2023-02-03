@@ -1,21 +1,22 @@
-import propTypes from 'prop-types';
+import React from 'react';
+import shortid from 'shortid';
+import PropTypes from 'prop-types';
 import css from './FeedbackOptions.module.css';
 
-export const FeedbackOptions = ({options, onLeaveFeedback}) => (
-    <div>
-    {options.map((option, index) => (
-      <button
-        key={index}
-        onClick={() => onLeaveFeedback(option)}
-        className={css.feedbackBtn}
-      >
-        {option}
-      </button>
-    ))}
-  </div>
-);
-
+const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+	return (
+		<>
+			{options.map((option) => (
+				<button key={shortid.generate()} type="button"  name={option} onClick={onLeaveFeedback} className={css.feedbackBtn}>
+					{option}
+				</button>
+			))}
+		</>
+	);
+};
 FeedbackOptions.propTypes = {
-   options: propTypes.arrayOf(propTypes.string).isRequired,
-  onLeaveFeedback: propTypes.func.isRequired,
-}
+	options: PropTypes.array.isRequired,
+	onLeaveFeedback: PropTypes.func.isRequired
+};
+
+export default FeedbackOptions;
